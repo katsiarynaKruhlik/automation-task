@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="UI testing task">
+
+    <test name="VisibilityTaskTest">
+        <classes>
+            <class name="tests.VisibilityTaskTest">
+            </class>
+        </classes>
+    </test>
+
+    <test name="ScrollbarsTest">
+        <classes>
+            <class name="tests.ScrollbarsTaskTest">
+            </class>
+        </classes>
+    </test>
+
+    <test name="AjaxDataTaskTest">
+        <classes>
+            <class name="tests.AjaxDataTaskTest">
+            </class>
+        </classes>
+    </test>
+
+    <test name="DynamicIdTaskTest">
+        <classes>
+            <class name="tests.DynamicIdTaskTest">
+            </class>
+        </classes>
+    </test>
+
+</suite>

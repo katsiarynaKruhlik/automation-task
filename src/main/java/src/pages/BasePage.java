@@ -1,20 +1,13 @@
 package src.pages;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.WebDriverRunner;
 import src.interfaces.ILogger;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
 
-import static com.codeborne.selenide.Selenide.*;
 
 
 abstract class BasePage implements ILogger {
-
-    public static final String visibilityLinkLocator = "a[href=\"/visibility\"]";
-    public static final String scrollbarsLinkLocator = "a[href=\"/scrollbars\"]";
-    public static final String ajaxLinkLocator = "a[href=\"/ajax\"]";
-    public static final String dynamicIdLinkLocator = "a[href=\"/dynamicid\"]";
 
     public void refreshPage() {
         log().info("Refreshing page");
@@ -28,28 +21,8 @@ abstract class BasePage implements ILogger {
         }
     }
 
-    public VisibilityTaskPage navigateToVisibilityTaskPage() {
-        log().info("Opening Visibility task page");
-        $(visibilityLinkLocator).shouldBe(Condition.visible).click();
-        return new VisibilityTaskPage();
+    public static boolean isUrlCorrect(String url) {
+        String currentUrl = WebDriverRunner.url();
+        return currentUrl.equals(url);
     }
-
-    public ScrollbarsTaskPage navigateTScrollbarsTaskPage() {
-        log().info("Opening Scrollbars task page");
-        $(scrollbarsLinkLocator).shouldBe(Condition.visible).click();
-        return new ScrollbarsTaskPage();
-    }
-
-    public AjaxDataTaskPage navigateToAjaxDataTaskPage() {
-        log().info("Opening AJAX data task page");
-        $(ajaxLinkLocator).shouldBe(Condition.visible).click();
-        return new AjaxDataTaskPage();
-    }
-
-    public DynamicIdTaskPage navigateToDynamicIdTaskPage() {
-        log().info("Opening Dynamic ID task page");
-        $(dynamicIdLinkLocator).shouldBe(Condition.visible).click();
-        return new DynamicIdTaskPage();
-    }
-
 }

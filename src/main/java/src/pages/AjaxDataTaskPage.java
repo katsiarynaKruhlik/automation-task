@@ -1,30 +1,33 @@
 package src.pages;
 
-import com.codeborne.selenide.Condition;
+import static com.codeborne.selenide.Condition.visible;
+import com.codeborne.selenide.SelenideElement;
+import java.time.Duration;
+import static src.utils.PageUrls.AJAX_DATA_URL;
+import static com.codeborne.selenide.Selectors.byLinkText;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 
 public class AjaxDataTaskPage extends BasePage {
 
-    private  final static String buttonTriggeringAjaxRequestLocator = "#ajaxButton";
-    private final static String labelText = "Data loaded with AJAX get request.";
+    private final static SelenideElement buttonTriggeringAjaxRequest = $("#ajaxButton");
+    private final static SelenideElement labelText = $(byText("Data loaded with AJAX get request."));
+    private static final SelenideElement ajaxDataLink = $(byLinkText("AJAX Data"));
 
-    public AjaxDataTaskPage triggerAjaxRequestButton() {
+    public boolean ajaxDataPageIsCurrent() {
+        ajaxDataLink.shouldBe(visible).click();
+        return isUrlCorrect(AJAX_DATA_URL);
+    }
+
+    public void triggerAjaxRequestButton() {
         log().info("Clicking AJAX request button");
-        $(buttonTriggeringAjaxRequestLocator).shouldBe(Condition.visible).click();
-        return this;
+        buttonTriggeringAjaxRequest.shouldBe(visible).click();
     }
 
     public boolean isLabelTextAppeared() {
-        return $(byText(labelText)).shouldBe(Condition.visible).isDisplayed();
-    }
-
-    public void waitUntilLabelTextAppears() {
         log().info("Waiting for Label text to appear");
-/*        Configuration.timeout = 15009;
-        $(byText(labelText)).shouldBe(Condition.visible);
-*/
-        sleep(16);
+        return labelText.shouldBe(visible, Duration.ofSeconds(16)).is(visible);
+
     }
 
 }

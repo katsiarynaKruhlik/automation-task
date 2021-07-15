@@ -5,32 +5,32 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import src.pages.VisibilityTaskPage;
+import static src.interfaces.IPageFactory.visibilityPage;
+import static src.utils.PageUrls.*;
 
 public class VisibilityTaskTest extends BaseTest {
 
-    @Epic(value = "Testing http://uitestingplayground.com/")
-    @Feature(value = "Test for http://uitestingplayground.com/visibility")
+    @Epic(value = "Testing " + BASE_URL)
+    @Feature(value = "Test for " + VISIBILITY_URL)
     @Description("Checks whether all buttons are hidden")
     @Test
     public void checkVisibilityOfAllButtons() {
-        VisibilityTaskPage visibilityTaskPage = new VisibilityTaskPage();
-        visibilityTaskPage.navigateToVisibilityTaskPage()
-                .clickHideButton();
+        Assert.assertTrue(visibilityPage.visibilityPageIsCurrent());
+        visibilityPage.clickHideBtn();
 
-        Assert.assertFalse(visibilityTaskPage.isRemovedButtonVisible());
+        Assert.assertFalse(visibilityPage.removedBtnIsVisible());
 
-        Assert.assertFalse(visibilityTaskPage.isZeroWidthButtonVisible());
+        Assert.assertFalse(visibilityPage.ZeroWidthBtnIsVisible());
 
-        Assert.assertFalse(visibilityTaskPage.isOverlappedButtonVisible());
+        Assert.assertFalse(visibilityPage.overlappedBtnIsVisible());
 
-        Assert.assertFalse(visibilityTaskPage.isTransparentButtonVisible());
+        Assert.assertFalse(visibilityPage.transparentBtnIsVisible());
 
-        Assert.assertFalse(visibilityTaskPage.isInvisibleButtonVisible());
+        Assert.assertFalse(visibilityPage.invisibleBtnIsVisible());
 
-        Assert.assertFalse(visibilityTaskPage.isNotDisplayedButtonVisible());
+        Assert.assertFalse(visibilityPage.notDisplayedBtnIsVisible());
 
-        Assert.assertFalse(visibilityTaskPage.isOffscreenButtonVisible());
+        Assert.assertFalse(visibilityPage.offscreenBtnIsVisible());
     }
 
 }

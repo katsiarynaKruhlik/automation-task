@@ -14,7 +14,6 @@ import static com.codeborne.selenide.Selenide.open;
 abstract class BaseTest implements ILogger{
 
     @BeforeTest
-    @Severity(value = SeverityLevel.CRITICAL)
     public void start() {
         DriverConfig.configuration();
         log().info("Opening home page");
@@ -22,7 +21,6 @@ abstract class BaseTest implements ILogger{
     }
 
     @AfterTest
-    @Severity(value = SeverityLevel.TRIVIAL)
     public void finish() {
         log().info("Closing web driver");
         closeWebDriver();

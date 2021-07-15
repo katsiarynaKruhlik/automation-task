@@ -1,67 +1,75 @@
 package src.pages;
 
-import com.codeborne.selenide.Condition;
-import org.openqa.selenium.ElementClickInterceptedException;
-
+import static com.codeborne.selenide.Condition.visible;
+import com.codeborne.selenide.SelenideElement;
+import static com.codeborne.selenide.Selectors.byLinkText;
 import static com.codeborne.selenide.Selenide.$;
+import static src.utils.PageUrls.VISIBILITY_URL;
 
 public class VisibilityTaskPage extends BasePage {
-    private static final String hideButtonLocator = "#hideButton";
+    private static final SelenideElement hideBtn = $("#hideButton");
 
-    private static final String removedButtonLocator = "#removedButton";
-    private static final String zeroWidthButtonLocator = "#zeroWidthButton";
-    private static final String overlappedButtonLocator = "#overlappedButton";
-    private static final String hidingLayerLocator = "#hidingLayer";
-    private static final String transparentButtonLocator = "#transparentButton";
-    private static final String invisibleButtonLocator = "#invisibleButton";
-    private static final String notDisplayedButtonLocator = "#notdisplayedButton";
-    private static final String offscreenButtonLocator = "#offscreenButton";
+    private static final SelenideElement removedBtn = $("#removedButton");
+    private static final SelenideElement zeroWidthBtn = $("#zeroWidthButton");
+    private static final SelenideElement overlappedBtn = $("#overlappedButton");
+    private static final SelenideElement hidingLayerLocator = $("#hidingLayer");
+    private static final SelenideElement transparentBtn = $("#transparentButton");
+    private static final SelenideElement invisibleBtn = $("#invisibleButton");
+    private static final SelenideElement notDisplayedBtn = $("#notdisplayedButton");
+    private static final SelenideElement offscreenBtn = $("#offscreenButton");
 
+    private static final SelenideElement visibilityLink = $(byLinkText("Visibility"));
 
-    public VisibilityTaskPage clickHideButton() {
-        log().info("Hiding buttons");
-        $(hideButtonLocator).shouldBe(Condition.visible).click();
-        return this;
+    public boolean visibilityPageIsCurrent() {
+        log().info("Opening visibility page");
+        visibilityLink.shouldBe(visible).click();
+        return isUrlCorrect(VISIBILITY_URL);
     }
 
-    public boolean isRemovedButtonVisible() {
-        return $(removedButtonLocator).exists();  //.shouldBe(Condition.exist)
-    }
-
-    private static double parseLocatorSizeValue(String locator, String valueType) {
-        String rawValue = $(locator).getCssValue(valueType);
+    private static double parseLocatorSizeValue(SelenideElement locator, String valueType) {
+        String rawValue = locator.getCssValue(valueType);
         String stringValue = rawValue.split("p", 2)[0];
         return Double.parseDouble(stringValue);
     }
 
-    public boolean isZeroWidthButtonVisible() {
-        double buttonWidth = parseLocatorSizeValue(zeroWidthButtonLocator, "width");
+    public void clickHideBtn() {
+        log().info("Hiding buttons");
+        hideBtn.shouldBe(visible).click();
+    }
+
+    public boolean removedBtnIsVisible() {
+        return removedBtn.exists();
+    }
+
+    public boolean ZeroWidthBtnIsVisible() {
+        log().info("Checking width");
+        double buttonWidth = parseLocatorSizeValue(zeroWidthBtn, "width");
         return buttonWidth > 0.0;
     }
 
-    public boolean isOverlappedButtonVisible() {
+    public boolean overlappedBtnIsVisible() {
         log().info("Checking whether hiding layer exists and button is overlapped");
-        boolean locationOfElementsIsSame = ($(hidingLayerLocator).getLocation()).equals($(overlappedButtonLocator).getLocation());
-        boolean hidingLayerIsTransparent = ($(hidingLayerLocator).getCssValue("color").equals("rgba(0, 0, 0, 0)"));
+        boolean locationOfElementsIsSame = hidingLayerLocator.getLocation().equals(overlappedBtn.getLocation());
+        boolean hidingLayerIsTransparent = hidingLayerLocator.getCssValue("color").equals("rgba(0, 0, 0, 0)");
         return (!locationOfElementsIsSame) &&
-                (hidingLayerIsTransparent);
+                hidingLayerIsTransparent;
     }
 
-    public boolean isTransparentButtonVisible() {
-        return Integer.parseInt($(transparentButtonLocator).getCssValue("opacity")) > 0;
+    public boolean transparentBtnIsVisible() {
+        return Integer.parseInt(transparentBtn.getCssValue("opacity")) > 0;
     }
 
-    public boolean isInvisibleButtonVisible() {
-        return !($(invisibleButtonLocator).getCssValue("visibility")).equals("hidden");
+    public boolean invisibleBtnIsVisible() {
+        return !(invisibleBtn.getCssValue("visibility").equals("hidden"));
     }
 
-    public boolean isNotDisplayedButtonVisible() {
-        return !($(notDisplayedButtonLocator).getCssValue("display").equals("none"));
+    public boolean notDisplayedBtnIsVisible() {
+        return !(notDisplayedBtn.getCssValue("display").equals("none"));
     }
 
-    public boolean isOffscreenButtonVisible() {
-        double buttonTop = parseLocatorSizeValue(offscreenButtonLocator, "top");
-        double buttonLeft = parseLocatorSizeValue(offscreenButtonLocator, "left");
+    public boolean offscreenBtnIsVisible() {
+        double buttonTop = parseLocatorSizeValue(offscreenBtn, "top");
+        double buttonLeft = parseLocatorSizeValue(offscreenBtn, "left");
         return (buttonTop > -0010.0) || (buttonLeft > -0080.0);
     }
 

@@ -3,6 +3,10 @@
 
 <suite name="UI testing task">
 
+    <listeners>
+        <listener class-name="src.utils.TestListener"/>
+    </listeners>
+
     <test name="VisibilityTaskTest">
         <classes>
             <class name="tests.VisibilityTaskTest">
@@ -27,6 +31,21 @@
     <test name="DynamicIdTaskTest">
         <classes>
             <class name="tests.DynamicIdTaskTest">
+            </class>
+        </classes>
+    </test>
+
+    <test name="DynamicTableTaskTest">
+        <classes>
+            <class name="tests.DynamicTableTaskTest">
+            </class>
+        </classes>
+    </test>
+
+
+    <test name="ProgressBarTest">
+        <classes>
+            <class name="tests.ProgressBarTaskTest">
             </class>
         </classes>
     </test>

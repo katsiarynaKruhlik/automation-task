@@ -5,20 +5,19 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import src.pages.AjaxDataTaskPage;
+
+import static src.utils.PageUrls.*;
+import static src.interfaces.IPageFactory.ajaxDataPage;
 
 public class AjaxDataTaskTest extends BaseTest {
 
-    @Epic(value = "Testing http://uitestingplayground.com/")
-    @Feature(value = "Test for http://uitestingplayground.com/ajax")
+    @Epic(value = "Testing " + BASE_URL)
+    @Feature(value = "Test for " + AJAX_DATA_URL)
     @Description("Checks whether test waits for label text to appear after processing AJAX request")
     @Test
-    public void isLabelTextAppeared() {
-        AjaxDataTaskPage ajaxDataTaskPage = new AjaxDataTaskPage();
-        ajaxDataTaskPage.navigateToAjaxDataTaskPage()
-                .triggerAjaxRequestButton()
-                .waitUntilLabelTextAppears();
-        Assert.assertTrue(ajaxDataTaskPage.isLabelTextAppeared());
-
+    public void waitForLabelToAppear() {
+        Assert.assertTrue(ajaxDataPage.ajaxDataPageIsCurrent());
+        ajaxDataPage.triggerAjaxRequestButton();
+        Assert.assertTrue(ajaxDataPage.isLabelTextAppeared());
     }
 }

@@ -4,6 +4,18 @@
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </Console>
+
+        <RollingFile name="LogFile"
+                     fileName="logs/${date:yyyy}/${date:MM} - ${date:MMM}/${date:MMM}-${date:dd} - app.log"
+                     filePattern="logs/${date:yyyy}/${date:MM} - ${date:MMM}/%d{dd} - Launcher-%i.log">
+            <PatternLayout>
+                <Pattern>%d %p %C{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <CronTriggeringPolicy schedule="0 0 0 * * ?"/>
+                <SizeBasedTriggeringPolicy size="250 MB"/>
+            </Policies>
+        </RollingFile>
     </Appenders>
 
     <Loggers>
@@ -14,6 +26,7 @@
         <!-- Root Logger -->
         <Root level="all">
             <AppenderRef ref="Console"/>
+            <AppenderRef ref="LogFile"/>
         </Root>
     </Loggers>
 

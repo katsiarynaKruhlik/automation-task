@@ -22,7 +22,7 @@ public class ClickTaskPage extends BasePage {
 
     public boolean btnNotClicked() {
         String btnClass = btnThatIgnoresClick.getAttribute("class");
-        btnThatIgnoresClick.shouldHave(cssValue("background-color","rgba(0, 123, 255, 1)"));
+        log().info("Check whether button is not clicked");
         assert btnClass != null;
         return btnClass.equals("btn btn-primary");
 
@@ -30,7 +30,7 @@ public class ClickTaskPage extends BasePage {
 
     public boolean btnInClickedState() {
         String btnClass = btnThatIgnoresClick.getAttribute("class");
-        btnThatIgnoresClick.shouldHave(cssValue("background-color", "rgba(40, 167, 69, 1)"));
+        log().info("Check whether button is clicked");
         assert btnClass != null;
         return btnClass.equals("btn btn-success");
     }

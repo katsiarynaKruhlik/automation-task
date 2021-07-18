@@ -15,6 +15,5 @@ public class DynamicTableTaskTest extends BaseTest {
     public void compareValuesOfCPU() {
         Assert.assertTrue(dynamicTablePage.dynamicTablePageIsCurrent());
         Assert.assertTrue(dynamicTablePage.valuesAreSame());
-        dynamicTablePage.sleep(5);
     }
 }

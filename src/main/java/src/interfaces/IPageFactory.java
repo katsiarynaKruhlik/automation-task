@@ -11,4 +11,7 @@ public interface IPageFactory {
     ProgressBarTaskPage progressBarPage = new ProgressBarTaskPage();
     ClickTaskPage clickPage = new ClickTaskPage();
     ClassAttributeTaskPage classAttributePage = new ClassAttributeTaskPage();
+    MouseOverTaskPage mouseOverPage = new MouseOverTaskPage();
+    TextInputTaskPage textInputPage = new TextInputTaskPage();
+    HiddenLayersTaskPage hiddenLayersPage = new HiddenLayersTaskPage();
 }

@@ -50,4 +50,35 @@
         </classes>
     </test>
 
+
+    <test name="ClickTest">
+        <classes>
+            <class name="tests.ClickTaskTest">
+            </class>
+        </classes>
+    </test>
+
+
+    <test name="HiddenLayersTest">
+        <classes>
+            <class name="tests.HiddenLayerTaskTest">
+            </class>
+        </classes>
+    </test>
+
+
+    <test name="MouseOverTest">
+        <classes>
+            <class name="tests.MouseOverTaskTest">
+            </class>
+        </classes>
+    </test>
+
+    <test name="TextInputTest">
+        <classes>
+            <class name="tests.TextInputTaskTest">
+            </class>
+        </classes>
+    </test>
+
 </suite>

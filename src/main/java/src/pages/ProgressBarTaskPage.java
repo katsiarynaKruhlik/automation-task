@@ -2,6 +2,7 @@ package src.pages;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
+
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byLinkText;
 import static com.codeborne.selenide.Selenide.$;
@@ -22,23 +23,26 @@ public class ProgressBarTaskPage extends BasePage {
     public void clickStart() {
         log().info("Click start button");
         startBtn.shouldBe(visible).click();
-    }
-
-    public void clickStop() {
-        log().info("Click stop button");
-        stopBtn.shouldBe(visible).click();
-        log().info(getPercentage());
+        stopBtn.shouldBe(visible);
     }
 
     public String getPercentage() {
         return progressBarLocator.getAttribute("aria-valuenow");
     }
 
-    public void waitTillCondition(){
-        Configuration.timeout = 25000;
-        progressBarLocator.should(text("75"));
+    public void waitTillCondition() {
+        Configuration.timeout = 20000;
+        int percentage = 25;
+        while (percentage < 75) {
+            percentage = Integer.parseInt(progressBarLocator.getAttribute("aria-valuenow"));
+            if (percentage >= 75) {
+                stopBtn.click();
+                log().info(getPercentage());
+
+            }
+        }
+
         Configuration.timeout = 10000;
-        clickStop();
 
     }
 }

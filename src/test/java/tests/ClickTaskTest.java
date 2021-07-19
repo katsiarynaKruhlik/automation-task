@@ -17,7 +17,6 @@ public class ClickTaskTest extends BaseTest {
         Assert.assertTrue(clickPage.btnNotClicked());
         clickPage.makeClick();
         Assert.assertTrue(clickPage.btnInClickedState());
-        clickPage.sleep(1);
     }
 
 }

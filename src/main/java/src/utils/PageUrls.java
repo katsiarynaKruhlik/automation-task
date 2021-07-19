@@ -9,4 +9,5 @@ public class PageUrls {
     public static final String DYNAMIC_ID_URL = "http://uitestingplayground.com/dynamicid";
     public static final String PROGRESS_BAR_URL = "http://uitestingplayground.com/progressbar";
     public static final String CLICK_URL = "http://uitestingplayground.com/click";
+    public static final String CLASS_ATTRIBUTE_URL = "http://uitestingplayground.com/classattr";
 }

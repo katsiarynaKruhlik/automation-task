@@ -10,4 +10,5 @@ public interface IPageFactory {
     VisibilityTaskPage visibilityPage = new VisibilityTaskPage();
     ProgressBarTaskPage progressBarPage = new ProgressBarTaskPage();
     ClickTaskPage clickPage = new ClickTaskPage();
+    ClassAttributeTaskPage classAttributePage = new ClassAttributeTaskPage();
 }
